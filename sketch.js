@@ -75,20 +75,58 @@ function update_canvas()
                 }
                 else
                 {
-                    tiles.fill(COLORS['red']);
+                    tiles.fill(COLORS['blue']);
                 }
             }
-            else if (j > (h_tiles - i) && j < i)
+            else if (j > (h_tiles - i - 1) && j < i)
             {
                 const j_rel = j - (h_tiles - i - 1);
-                console.log(j_rel);
                 if (j_rel % 2 == 1)
                 {
                     tiles.fill(COLORS['white']);
                 }
                 else
                 {
-                    tiles.fill(COLORS['red']);
+                    tiles.fill(COLORS['blue']);
+                }
+            }
+            else if (i > 2 && i < h_tiles - 2 - 1)
+            {
+                if (i < h_tiles / 2)
+                {
+                    if (j < h_tiles / 2)
+                    {
+                        if ((i - j + 1) % 4 < 2)
+                        {
+                            tiles.fill(COLORS['blue']);
+                        }
+                        else
+                        {
+                            tiles.fill(COLORS['white']);
+                        }
+                    }
+                    else
+                    {
+                        if ((i + j + 1) % 4 < 2)
+                        {
+                            tiles.fill(COLORS['blue']);
+                        }
+                        else
+                        {
+                            tiles.fill(COLORS['white']);
+                        }
+                    }
+                }
+                else
+                {
+                    if ((j - i + 1) % 4 < 2)
+                    {
+                        tiles.fill(COLORS['blue']);
+                    }
+                    else
+                    {
+                        tiles.fill(COLORS['white']);
+                    }
                 }
             }
             else
