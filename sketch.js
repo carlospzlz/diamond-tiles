@@ -76,7 +76,7 @@ function create_tiles(width, height)
     tiles = createGraphics(width, height);
 
     const tile_width = width / n_tiles;
-    const tile_height = height / n_tiles;
+    const tile_height = height / (n_tiles - 1);
 
     // Upper half
     for (let i = 0; i < n_tiles / 2; ++i)
@@ -131,7 +131,7 @@ function create_tiles(width, height)
     }
 
     // Lower half
-    for (let i = 0; i < n_tiles / 2; ++i)
+    for (let i = 0; i < n_tiles / 2 - 1; ++i)
     {
         const half_tiles = int(n_tiles / 2);
         const y = (half_tiles + i) * tile_height;
