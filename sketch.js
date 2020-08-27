@@ -7,6 +7,8 @@ const COLORS = {
     'blue' : [0, 0, 255],
     'white': [255, 255, 255],
     'black': [0, 0, 0],
+    'main': [220, 150, 150],
+    'second': [150, 150, 220],
 };
 
 const DIMENSIONS = {
@@ -19,8 +21,8 @@ const DIMENSIONS = {
 
 // Tiles
 let n_tiles = 11;
-let main_color = COLORS['red'];
-let second_color = COLORS['blue'];
+let main_color = COLORS['main'];
+let second_color = COLORS['second'];
 let background_color = COLORS['white'];
 let outline = true;
 
