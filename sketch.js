@@ -9,6 +9,14 @@ const COLORS = {
     'black': [0, 0, 0],
 };
 
+const DIMENSIONS = {
+    'a1': [7016, 9933],
+    'a2': [4690, 7016],
+    'a3': [3508, 4690],
+    'a4': [2480, 3508],
+    'a5': [1748, 2480],
+}
+
 // Tiles
 let n_tiles = 11;
 let main_color = COLORS['red'];
@@ -51,6 +59,23 @@ function setup()
     let columns_slider = createSlider(0, 10, columns);
     columns_slider.input(on_columns_changed);
     columns_slider.parent('columns-param');
+
+    // Create Download
+    let dina1_button = createButton('Din A1');
+    dina1_button.parent('download-dinA1');
+    dina1_button.mousePressed(on_download_dina1);
+
+    let dina2_button = createButton('Din A2');
+    dina2_button.parent('download-dinA2');
+    dina2_button.mousePressed(on_download_dina2);
+
+    let dina3_button = createButton('Din A3');
+    dina3_button.parent('download-dinA3');
+    dina3_button.mousePressed(on_download_dina3);
+
+    let dina4_button = createButton('Din A4');
+    dina4_button.parent('download-dinA4');
+    dina4_button.mousePressed(on_download_dina4);
 
     // Create Canvas
     let canvas = createCanvas(WIDTH, HEIGHT);
@@ -99,6 +124,26 @@ function on_rows_changed()
 {
     rows = this.value();
     update_canvas();
+}
+
+function on_download_dina1()
+{
+    download_image('a1', 'diamond-tiles-dinA1.png');
+}
+
+function on_download_dina2()
+{
+    download_image('a2', 'diamond-tiles-dinA2.png');
+}
+
+function on_download_dina3()
+{
+    download_image('a3', 'diamond-tiles-dinA3.png');
+}
+
+function on_download_dina4()
+{
+    download_image('a4', 'diamond-tiles-dinA4.png');
 }
 
 function update_canvas()
@@ -237,7 +282,26 @@ function create_tiles(width, height)
     return tiles;
 }
 
-function draw()
+function download_image(format, filename)
 {
-    // Empty
+    img = createGraphics(DIMENSIONS[format][0], DIMENSIONS[format][1]);
+
+    const width = int(Math.round(img.width / columns));
+    const height = int(Math.round(img.height / rows));
+
+    img.background(255, 255, 255);
+
+    let tiles = create_tiles(width, height);
+
+    for (let i = 0; i < columns; ++i)
+    {
+        for (let j = 0; j < rows; ++j)
+        {
+            const dx = int(i * width);
+            const dy = int(j * height);
+            img.copy(tiles, 0, 0, width, height, dx, dy, width, height);
+        }
+    }
+
+    save(img, filename);
 }
