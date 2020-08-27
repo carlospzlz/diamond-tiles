@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Alameda</title>
+	<title>Diamond Tiles</title>
 
 	<script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
 	<script src="sketch.js"></script>
@@ -14,14 +14,23 @@
 </head>
 <body>
     <div id="title">
-        <h2>Alameda</h2>
+        <h2>Diamond Tiles</h2>
     </div>
     <div class="row">
         <div class="column" id="parameters">
             <h4>Tiles</h4>
             <div class="group-params">
-                <div>Size</div>
-                <div id="tile-size-param"></div>
+                <div>Number of tiles</div>
+                <div id="n-tiles-param"></div>
+                <div class="flex-container">
+                    <div id="second-color-param" style="flex-grow: 4"></div>
+                    <div style="flex-grow: 1"></div>
+                    <div id="main-color-param" style="flex-grow: 4"></div>
+                    <div style="flex-grow: 1"></div>
+                    <div id="background-color-param" style="flex-grow: 4"></div>
+                    <div style="flex-grow: 1"></div>
+                    <div id="outline-param" style="flex-grow: 4"></div>
+                </div>
             </div>
             <h4>Repetition</h4>
             <div class="group-params">
@@ -30,6 +39,16 @@
                 <div>Number of Columns</div>
                 <div id="columns-param"></div>
             </div>
+            <h4>Download</h4>
+                <div class="flex-container">
+                    <div id="download-dinA1" style="flex-grow: 4"></div>
+                    <div style="flex-grow: 1"></div>
+                    <div id="download-dinA2" style="flex-grow: 4"></div>
+                    <div style="flex-grow: 1"></div>
+                    <div id="download-dinA3" style="flex-grow: 4"></div>
+                    <div style="flex-grow: 1"></div>
+                    <div id="download-dinA4" style="flex-grow: 4"></div>
+                </div>
         </div>
         <div class="column" id="canvas-container"></div>
     </div>

@@ -9,17 +9,39 @@ const COLORS = {
     'black': [0, 0, 0],
 };
 
+// Tiles
 let n_tiles = 11;
-let square_size = 10;
+let main_color = COLORS['red'];
+let second_color = COLORS['blue'];
+let background_color = COLORS['white'];
+let outline = true;
+
+// Repetition
 let columns = 2;
 let rows = 2;
 
 function setup()
 {
-    // Tiles size
+    // Tiles
     n_tiles_slider = createSlider(11, 41, n_tiles, 2);
     n_tiles_slider.input(on_n_tiles_changed);
-    n_tiles_slider.parent('tile-size-param');
+    n_tiles_slider.parent('n-tiles-param');
+
+    let main_color_picker = createColorPicker(color(main_color));
+    main_color_picker.input(on_main_color_changed);
+    main_color_picker.parent('main-color-param');
+
+    let second_color_picker = createColorPicker(color(second_color));
+    second_color_picker.input(on_second_color_changed);
+    second_color_picker.parent('second-color-param');
+
+    let background_color_picker = createColorPicker(color(background_color));
+    background_color_picker.input(on_background_color_changed);
+    background_color_picker.parent('background-color-param');
+
+    let outline_checkbox = createCheckbox('Outline', outline);
+    outline_checkbox.changed(on_outline_changed);
+    outline_checkbox.parent('outline-param');
 
     // Create Repetition Parameters
     let rows_slider = createSlider(0, 10, rows);
@@ -40,6 +62,30 @@ function setup()
 function on_n_tiles_changed()
 {
     n_tiles = this.value();
+    update_canvas();
+}
+
+function on_main_color_changed()
+{
+    main_color = this.color();
+    update_canvas();
+}
+
+function on_second_color_changed()
+{
+    second_color = this.color();
+    update_canvas();
+}
+
+function on_background_color_changed()
+{
+    background_color = this.color();
+    update_canvas();
+}
+
+function on_outline_changed()
+{
+    outline = this.checked();
     update_canvas();
 }
 
@@ -78,6 +124,12 @@ function create_tiles(width, height)
     const tile_width = width / n_tiles;
     const tile_height = height / (n_tiles - 1);
 
+    tiles.background(background_color);
+    if (!outline)
+    {
+        tiles.noStroke();
+    }
+
     // Upper half
     for (let i = 0; i < n_tiles / 2; ++i)
     {
@@ -87,43 +139,43 @@ function create_tiles(width, height)
 
             if ((j - i) % 3 == 0)
             {
-                tiles.fill(COLORS['blue']);
+                tiles.fill(second_color);
             }
             else
             {
-                tiles.fill(COLORS['white']);
+                tiles.fill(background_color);
             }
             const x = j * tile_width;
             tiles.rect(x, y, tile_width, tile_height);
         }
-        tiles.fill(COLORS['red']);
+        tiles.fill(main_color);
         let x = i * tile_width;
         tiles.rect(x, y, tile_width, tile_height);
         for (let j = i + 1; j < n_tiles - i - 1; ++j)
         {
             if ((i + j) % 2 == 0)
             {
-                tiles.fill(COLORS['blue']);
+                tiles.fill(second_color);
             }
             else
             {
-                tiles.fill(COLORS['white']);
+                tiles.fill(background_color);
             }
             const x = j * tile_width;
             tiles.rect(x, y, tile_width, tile_height);
         }
-        tiles.fill(COLORS['red']);
+        tiles.fill(main_color);
         x = (n_tiles - i - 1) * tile_width;
         tiles.rect(x, y, tile_width, tile_height);
         for (let j = n_tiles - i; j < n_tiles; ++j)
         {
             if ((j - (n_tiles - i)) % 3 == 2)
             {
-                tiles.fill(COLORS['blue']);
+                tiles.fill(second_color);
             }
             else
             {
-                tiles.fill(COLORS['white']);
+                tiles.fill(background_color);
             }
             const x = j * tile_width;
             tiles.rect(x, y, tile_width, tile_height);
@@ -139,44 +191,43 @@ function create_tiles(width, height)
         {
             if ((n_tiles + i + j - 1) % 3 == 0)
             {
-                tiles.fill(COLORS['blue']);
+                tiles.fill(second_color);
             }
             else
             {
-                tiles.fill(COLORS['white']);
+                tiles.fill(background_color);
             }
             const x = j * tile_width;
             tiles.rect(x, y, tile_width, tile_height);
         }
-        tiles.fill(COLORS['red']);
+        tiles.fill(main_color);
         let x = (half_tiles - i) * tile_width;
-        tiles.fill(COLORS['red']);
         tiles.rect(x, y, tile_width, tile_height);
         for (let j = half_tiles - i + 1; j < half_tiles + i; ++j)
         {
             if ((half_tiles + i + j) % 2 == 0)
             {
-                tiles.fill(COLORS['blue']);
+                tiles.fill(second_color);
             }
             else
             {
-                tiles.fill(COLORS['white']);
+                tiles.fill(background_color);
             }
             const x = j * tile_width;
             tiles.rect(x, y, tile_width, tile_height);
         }
-        tiles.fill(COLORS['red']);
+        tiles.fill(main_color);
         x = (half_tiles + i) * tile_width;
         tiles.rect(x, y, tile_width, tile_height);
         for (let j = half_tiles + i + 1; j < n_tiles; ++j)
         {
             if ((j - half_tiles - i) % 3 == 0)
             {
-                tiles.fill(COLORS['blue']);
+                tiles.fill(second_color);
             }
             else
             {
-                tiles.fill(COLORS['white']);
+                tiles.fill(background_color);
             }
             const x = j * tile_width;
             tiles.rect(x, y, tile_width, tile_height);
