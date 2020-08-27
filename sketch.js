@@ -9,14 +9,14 @@ const COLORS = {
     'black': [0, 0, 0],
 };
 
-let h_tiles = 11;
+let n_tiles = 11;
 let square_size = 10;
 
 function setup()
 {
-    h_tiles_slider = createSlider(11, 41, h_tiles, 2);
-    h_tiles_slider.input(on_h_tiles_changed);
-    h_tiles_slider.parent('tile-size-param');
+    n_tiles_slider = createSlider(11, 41, n_tiles, 2);
+    n_tiles_slider.input(on_n_tiles_changed);
+    n_tiles_slider.parent('tile-size-param');
 
     // Create Canvas
     let canvas = createCanvas(WIDTH, HEIGHT);
@@ -25,9 +25,9 @@ function setup()
     update_canvas();
 }
 
-function on_h_tiles_changed()
+function on_n_tiles_changed()
 {
-    h_tiles = this.value();
+    n_tiles = this.value();
     update_canvas();
 }
 
@@ -35,13 +35,12 @@ function update_canvas()
 {
     tiles = createGraphics(WIDTH, HEIGHT);
 
-    const tile_size = WIDTH / h_tiles;
-    const v_tiles = HEIGHT / tile_size;
+    const tile_size = WIDTH / n_tiles;
 
     /*
-    for (let i = 0; i < h_tiles; ++i)
+    for (let i = 0; i < n_tiles; ++i)
     {
-        for (let j = 0; j < v_tiles; ++j)
+        for (let j = 0; j < n_tiles; ++j)
         {
             const x = i * tile_size;
             const y = j * tile_size;
@@ -58,15 +57,17 @@ function update_canvas()
     }
     */
 
-    for (let i = 0; i < v_tiles; ++i)
+    /*
+    const offset = n_tiles % 3;
+    for (let i = 0; i < n_tiles; ++i)
     {
-        for (let j = 0; j < h_tiles; ++j)
+        for (let j = 0; j < n_tiles; ++j)
         {
-            if (i == j || i == (h_tiles - j - 1))
+            if (i == j || i == (n_tiles - j - 1))
             {
                 tiles.fill(COLORS['red']);
             }
-            else if (j > i && j < (h_tiles - i))
+            else if (j > i && j < (n_tiles - i))
             {
                 const j_rel = j - i;
                 if (j_rel % 2 == 1)
@@ -78,9 +79,9 @@ function update_canvas()
                     tiles.fill(COLORS['blue']);
                 }
             }
-            else if (j > (h_tiles - i - 1) && j < i)
+            else if (j > (n_tiles - i - 1) && j < i)
             {
-                const j_rel = j - (h_tiles - i - 1);
+                const j_rel = j - (n_tiles - i - 1);
                 if (j_rel % 2 == 1)
                 {
                     tiles.fill(COLORS['white']);
@@ -90,13 +91,13 @@ function update_canvas()
                     tiles.fill(COLORS['blue']);
                 }
             }
-            else if (i > 2 && i < h_tiles - 2 - 1)
+            else if (i > 2 && i < n_tiles - 2 - 1)
             {
-                if (i < h_tiles / 2)
+                if (i < n_tiles / 2)
                 {
-                    if (j < h_tiles / 2)
+                    if (j < n_tiles / 2)
                     {
-                        if ((i - j + 1) % 4 < 2)
+                        if ((i - j + 1) % 3 == 1)
                         {
                             tiles.fill(COLORS['blue']);
                         }
@@ -107,7 +108,7 @@ function update_canvas()
                     }
                     else
                     {
-                        if ((i + j + 1) % 4 < 2)
+                        if ((i + j + offset) % 3 == 1)
                         {
                             tiles.fill(COLORS['blue']);
                         }
@@ -135,6 +136,110 @@ function update_canvas()
             }
             const x = j * tile_size;
             const y = i * tile_size;
+            tiles.rect(x, y, tile_size, tile_size);
+        }
+    }
+    */
+    // Upper half
+    for (let i = 0; i < n_tiles / 2; ++i)
+    {
+        const y = i * tile_size;
+        for (let j = 0; j < i; ++j)
+        {
+
+            if ((j - i) % 3 == 0)
+            {
+                tiles.fill(COLORS['blue']);
+            }
+            else
+            {
+                tiles.fill(COLORS['white']);
+            }
+            const x = j * tile_size;
+            tiles.rect(x, y, tile_size, tile_size);
+        }
+        tiles.fill(COLORS['red']);
+        tiles.rect(y, y, tile_size, tile_size);
+        for (let j = i + 1; j < n_tiles - i - 1; ++j)
+        {
+            if ((i + j) % 2 == 0)
+            {
+                tiles.fill(COLORS['blue']);
+            }
+            else
+            {
+                tiles.fill(COLORS['white']);
+            }
+            const x = j * tile_size;
+            tiles.rect(x, y, tile_size, tile_size);
+        }
+        tiles.fill(COLORS['red']);
+        const x = (n_tiles - i - 1) * tile_size;
+        tiles.rect(x, y, tile_size, tile_size);
+        for (let j = n_tiles - i; j < n_tiles; ++j)
+        {
+            if ((j - (n_tiles - i)) % 3 == 2)
+            {
+                tiles.fill(COLORS['blue']);
+            }
+            else
+            {
+                tiles.fill(COLORS['white']);
+            }
+            const x = j * tile_size;
+            tiles.rect(x, y, tile_size, tile_size);
+        }
+    }
+
+    // Lower half
+    for (let i = 0; i < n_tiles / 2; ++i)
+    {
+        const half_tiles = int(n_tiles / 2);
+        const y = (half_tiles + i) * tile_size;
+        for (let j = 0; j < n_tiles / 2 - i; ++j)
+        {
+            if ((n_tiles + i + j - 1) % 3 == 0)
+            {
+                tiles.fill(COLORS['blue']);
+            }
+            else
+            {
+                tiles.fill(COLORS['white']);
+            }
+            const x = j * tile_size;
+            tiles.rect(x, y, tile_size, tile_size);
+        }
+        tiles.fill(COLORS['red']);
+        let x = (half_tiles - i) * tile_size;
+        tiles.fill(COLORS['red']);
+        tiles.rect(x, y, tile_size, tile_size);
+        for (let j = half_tiles - i + 1; j < half_tiles + i; ++j)
+        {
+            if ((half_tiles + i + j) % 2 == 0)
+            {
+                tiles.fill(COLORS['blue']);
+            }
+            else
+            {
+                tiles.fill(COLORS['white']);
+            }
+            const x = j * tile_size;
+            tiles.rect(x, y, tile_size, tile_size);
+        }
+        tiles.fill(COLORS['red']);
+        x = (half_tiles + i) * tile_size;
+        tiles.rect(x, y, tile_size, tile_size);
+        for (let j = half_tiles + i + 1; j < n_tiles; ++j)
+        {
+            if ((j - half_tiles - i) % 3 == 0)
+            {
+                tiles.fill(COLORS['blue']);
+            }
+            else
+            {
+                tiles.fill(COLORS['white']);
+            }
+            const x = j * tile_size;
             tiles.rect(x, y, tile_size, tile_size);
         }
     }
