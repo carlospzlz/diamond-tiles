@@ -1,5 +1,8 @@
+const SERVER_URL = 'http://ec2-35-177-210-34.eu-west-2.compute.amazonaws.com'
+
 const WIDTH = 400;
 const HEIGHT = 564;
+const UPLOAD_DOWNSCALE = 2;
 
 const COLORS = {
     'red': [255, 0, 0],
@@ -130,21 +133,29 @@ function on_rows_changed()
 
 function on_download_dina1()
 {
+    upload_params('diamond-tiles', 'dinA1');
+    upload_image('diamond-tiles');
     download_image('a1', 'diamond-tiles-dinA1.png');
 }
 
 function on_download_dina2()
 {
+    upload_params('diamond-tiles', 'dinA2');
+    upload_image('diamond-tiles');
     download_image('a2', 'diamond-tiles-dinA2.png');
 }
 
 function on_download_dina3()
 {
+    upload_params('diamond-tiles', 'dinA3');
+    upload_image('diamond-tiles');
     download_image('a3', 'diamond-tiles-dinA3.png');
 }
 
 function on_download_dina4()
 {
+    upload_params('diamond-tiles', 'dinA4');
+    upload_image('diamond-tiles');
     download_image('a4', 'diamond-tiles-dinA4.png');
 }
 
@@ -286,7 +297,13 @@ function create_tiles(width, height)
 
 function download_image(format, filename)
 {
-    img = createGraphics(DIMENSIONS[format][0], DIMENSIONS[format][1]);
+    img = create_image(DIMENSIONS[format][0], DIMENSIONS[format][1]);
+    save(img, filename)
+}
+
+function create_image(img_width, img_height)
+{
+    img = createGraphics(img_width, img_height);
 
     const width = int(Math.round(img.width / columns));
     const height = int(Math.round(img.height / rows));
@@ -305,5 +322,48 @@ function download_image(format, filename)
         }
     }
 
-    save(img, filename);
+    return img;
+}
+
+function upload_params(tool, size)
+{
+    const url = SERVER_URL + '/cgi-bin/upload-params';
+    const params_data = {
+        'tool': tool,
+        'size': size,
+        'n_tiles': n_tiles,
+        'main_color': main_color,
+        'second_color': second_color,
+        'background_color': background_color,
+        'outline': outline,
+        'columns': columns,
+        'rows': rows,
+    };
+    const options = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        mode: 'no-cors', body: JSON.stringify(params_data)
+    };
+    fetch(url, options);
+}
+
+function upload_image(tool)
+{
+    const url = SERVER_URL + '/cgi-bin/upload-image';
+    width = int(WIDTH / UPLOAD_DOWNSCALE);
+    height = int(HEIGHT / UPLOAD_DOWNSCALE);
+    img = create_image(width, height);
+    img.loadPixels();
+    const image_data = {
+        'tool': tool,
+        'width': width,
+        'height': height,
+        'pixels': img.pixels,
+    }
+    const options = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        mode: 'no-cors', body: JSON.stringify(image_data)
+    };
+    fetch(url, options);
 }
