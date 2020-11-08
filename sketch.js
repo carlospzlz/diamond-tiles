@@ -33,6 +33,21 @@ let outline = true;
 let columns = 2;
 let rows = 2;
 
+function get_query_variable(variable)
+{
+    const query = window.location.search.substring(1);
+    const vars = query.split("&");
+    for (let i = 0; i < vars.length; ++i)
+    {
+        const pair = vars[i].split("=");
+        if(pair[0] == variable)
+        {
+            return pair[1];
+        }
+    }
+    return false;
+}
+
 function setup()
 {
     // Tiles
@@ -86,6 +101,42 @@ function setup()
     let canvas = createCanvas(WIDTH, HEIGHT);
     canvas.parent("canvas-container");
 
+    // Load parameters from template and update canvas.
+    load_parameters();
+}
+
+function load_parameters()
+{
+    const value = get_query_variable("template");
+    console.log(value);
+    if (!value)
+    {
+        update_canvas();
+        return;
+    }
+
+    const url =
+        SERVER_URL + '/tools/diamond-tiles/templates/json/' + value + '.json';
+
+    fetch(url)
+        .then(function(resp) {
+            return resp.json();
+        })
+        .then(function(data) {
+            on_parameters_received(data);
+        });
+}
+
+function on_parameters_received(data)
+{
+    background_color = data['background_color'];
+    columns = data['columns'];
+    main_color = data['main_color'];
+    n_tiles = data['n_tiles'];
+    outline = data['outline'];
+    rows = data['rows'];
+    second_color = data['second_color'];
+
     update_canvas();
 }
 
@@ -97,19 +148,19 @@ function on_n_tiles_changed()
 
 function on_main_color_changed()
 {
-    main_color = this.color();
+    main_color = this.value();
     update_canvas();
 }
 
 function on_second_color_changed()
 {
-    second_color = this.color();
+    second_color = this.value();
     update_canvas();
 }
 
 function on_background_color_changed()
 {
-    background_color = this.color();
+    background_color = this.value();
     update_canvas();
 }
 
