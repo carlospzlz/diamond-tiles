@@ -1,0 +1,11 @@
+{
+    "background_color": "#b37575",
+    "columns": 10,
+    "main_color": "#ffffff",
+    "n_tiles": 33,
+    "outline": false,
+    "rows": 5,
+    "second_color": "#ffffff",
+    "size": "dinA4",
+    "tool": "diamond-tiles"
+}
