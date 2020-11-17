@@ -231,18 +231,32 @@ function on_download_dina4()
 
 function update_canvas()
 {
-    const width = Math.round(WIDTH / columns);
-    const height = Math.round(HEIGHT / rows);
+    const img = create_image(WIDTH, HEIGHT);
+    image(img, 0, 0, WIDTH, HEIGHT);
+}
 
-    tiles = create_tiles(width, height);
+function create_image(img_width, img_height)
+{
+    img = createGraphics(img_width, img_height);
+
+    const width = int(Math.round(img.width / columns));
+    const height = int(Math.round(img.height / rows));
+
+    img.background(255, 255, 255);
+
+    let tiles = create_tiles(width, height);
 
     for (let i = 0; i < columns; ++i)
     {
         for (let j = 0; j < rows; ++j)
         {
-            image(tiles, i * width, j * height, width, height);
+            const dx = int(i * width);
+            const dy = int(j * height);
+            img.copy(tiles, 0, 0, width, height, dx, dy, width, height);
         }
     }
+
+    return img;
 }
 
 function create_tiles(width, height)
@@ -369,30 +383,6 @@ function download_image(format, filename)
 {
     img = create_image(DIMENSIONS[format][0], DIMENSIONS[format][1]);
     save(img, filename)
-}
-
-function create_image(img_width, img_height)
-{
-    img = createGraphics(img_width, img_height);
-
-    const width = int(Math.round(img.width / columns));
-    const height = int(Math.round(img.height / rows));
-
-    img.background(255, 255, 255);
-
-    let tiles = create_tiles(width, height);
-
-    for (let i = 0; i < columns; ++i)
-    {
-        for (let j = 0; j < rows; ++j)
-        {
-            const dx = int(i * width);
-            const dy = int(j * height);
-            img.copy(tiles, 0, 0, width, height, dx, dy, width, height);
-        }
-    }
-
-    return img;
 }
 
 function upload_params(tool, size)
