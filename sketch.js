@@ -33,6 +33,17 @@ let outline = true;
 let columns = 2;
 let rows = 2;
 
+// Widgets
+// Tiles
+let n_tiles_slider;
+let main_color_picker;
+let background_color_picker;
+let outline_checkbox;
+
+// Repetition
+let rows_slider;
+let columns_slider;
+
 function get_query_variable(variable)
 {
     const query = window.location.search.substring(1);
@@ -55,28 +66,28 @@ function setup()
     n_tiles_slider.input(on_n_tiles_changed);
     n_tiles_slider.parent('n-tiles-param');
 
-    let main_color_picker = createColorPicker(color(main_color));
+    main_color_picker = createColorPicker(color(main_color));
     main_color_picker.input(on_main_color_changed);
     main_color_picker.parent('main-color-param');
 
-    let second_color_picker = createColorPicker(color(second_color));
+    second_color_picker = createColorPicker(color(second_color));
     second_color_picker.input(on_second_color_changed);
     second_color_picker.parent('second-color-param');
 
-    let background_color_picker = createColorPicker(color(background_color));
+    background_color_picker = createColorPicker(color(background_color));
     background_color_picker.input(on_background_color_changed);
     background_color_picker.parent('background-color-param');
 
-    let outline_checkbox = createCheckbox('Outline', outline);
+    outline_checkbox = createCheckbox('Outline', outline);
     outline_checkbox.changed(on_outline_changed);
     outline_checkbox.parent('outline-param');
 
     // Create Repetition Parameters
-    let rows_slider = createSlider(0, 10, rows);
+    rows_slider = createSlider(0, 10, rows);
     rows_slider.input(on_rows_changed);
     rows_slider.parent('rows-param');
 
-    let columns_slider = createSlider(0, 10, columns);
+    columns_slider = createSlider(0, 10, columns);
     columns_slider.input(on_columns_changed);
     columns_slider.parent('columns-param');
 

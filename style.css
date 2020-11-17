@@ -1,93 +1,461 @@
+@font-face {
+   font-family: nunitoLight;
+   src: url(resources/nunito/Nunito-Light.ttf);
+}
+@font-face {
+   font-family: nunitoExtraLight;
+   src: url(resources/nunito/Nunito-ExtraLight.ttf);
+}
+@font-face {
+   font-family: nunitoBold;
+   src: url(resources/nunito/Nunito-Bold.ttf);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
 body {
-    background-color: #e9e5e2;
-    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-    font-size: 12px;
+  font-family: 'Nunito';
+  /*height: 100%;*/
+  width: 100%
+}
+
+a 
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navigation */
+
+.nav-container {
+  background: #FFFFFF;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+  height: 80px;
+  overflow-x: hidden;
+}
+
+.wrapper {
+  width: 90%; /* Space of the content, right-left */
+  margin: 0 auto;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+nav ul {
+  display: flex;
+  height: 80px;
+  align-items: center;
+}
+
+div .logo {
+  font-family: nunitoLight;
+  font-style: normal;
+  color: #B8B7B2;
+  font-size: 16px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.tool-name {
+  color: #DACA91;
+}
+
+nav .logo img{
+  height: 50px;
+}
+
+.init-info li {
+  list-style: none;
+  margin-right: 20px; /* Space between menu items */
+}
+
+.nav-items li {
+  list-style: none;
+  margin-right: 0px;  Space between menu items */
+}
+
+.nav-items li:nth-last-of-type(1) { /* Remove space on the right side of the last element of the menu */
+  margin: 0;
+}
+
+.nav-items button {
+  font-family: 'Nunito';
+  background: white;
+  font-weight: normal;
+  font-size: 14px;
+  color: #B8B7B2;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  height: 80px;
+  width: 120px;
+}
+
+.nav-items button:hover {
+  background-color: #F4EFDC;
+}
+
+#menu-btn-active {
+  border-bottom: 2px solid #E4D69C;
+  font-family: nunitoBold;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.02);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  font-family: nunitoLight;
+  color: #B8B7B2;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #F4EFDC;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    border-top: 2px solid #E4D69C;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #F4EFDC;
+}
+
+/* Tool */
+
+.tool-container{
+  height: calc(100% - 80px);
+  display: flex;
+  width: 100%;
+  position:fixed;
 }
 
 .column {
-    float: left;
-    width: 40%;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
 }
 
-.flex-container {
+/* Tool - Parameters */
+#parameters-container {
+  background: #FFFFFF;
+  border-top: 2px solid #FAF9F8;
+  text-align: center;
+  overflow:auto;
+}
+
+::-webkit-scrollbar {
+    /*display: none;*/
+  width: 5px;
+  background: white; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f2f1ed;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #B8B7B2;
+  cursor: pointer;
+}
+
+.box {
+    /*background: blue;*/
+  border-radius: 50px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.06);
+  height:auto;
+  padding:5%;
+  padding-top: 3%;
+  margin: 3% auto;
+  margin-bottom: 3%;
+  width: 85%;
+  display: inline-block;
+}
+
+.group {
     display: flex;
+    /*margin: 2% auto;*/
 }
 
-.group-params {
-    background-color: #f5f2f0;
-    padding: 4%;
+.group * {
+  align-items: center;
+  width: 100%;
+  margin-right: 10px
 }
 
-#title {
-    position: fixed;
-    color: #FFFFFF;
-    background-color: #9696DC;
-    width: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
+.group input[type="range"]:nth-last-of-type(1),p:nth-last-of-type(1) { /* Remove space on the right side of the last element of the menu */
+  margin: 0;
 }
 
-#parameters {
-    border: 2px solid black;
-    padding: 3%;
-    padding-top: 1%;
-    width: 30%;
-    margin-top: 5%;
-    margin-left: 10%;
-}
 
+/* Tool - Canvas */
 #canvas-container {
-    margin-top: 5%;
-    margin-left: 50%;
-    position:fixed;
+  background: #FAF9F8;
+  margin: 0 auto;
+  align-items: center;
+  text-align: center;
+  height:100%;
 }
 
-p {
-    margin-block-start: 4px;
-    margin-block-end: 4px;
+#canvas-container ul {
+  display: inline-block;
+  list-style-type: none;
+  align-items: center;
+  padding-inline-start: 0px;
+  box-sizing: border-box;
+  margin: 10px auto;
+  width: 100%;
+  height:100%;
 }
 
-input[type="range"] {
-    width: 100%;
-    height: 2px;
-    -webkit-appearance:none;
-    background-color: black;
-    outline: none;
-    margin-bottom: 10px;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance:none;
-    background: black;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-}
-
-select {
-    position: relative;
-    font-family: Lucida Console, monospace;
-    background: #e9e5e2;
-    #width: 30%;
-    padding: 5px;
-    outline: none;
-}
-
-select:focus, select:hover {
-    outline: none;
-    border: 1px solid;
+.canvas-list {
+  height: auto;
 }
 
 canvas {
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: auto;
-    margin-bottom: auto;
-    display: block;
+  background: #FFFFFF;
+  border-radius: 50px;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.02);
+  height: 100%;
+}
+
+#canvas-element{
+  height: 90%;
+}
+
+.tool-container button {
+  font-family: 'Nunito';
+  background: #F4EFDC;
+  font-size: 14px;
+  color: #DBBF4D;
+  padding: 12px 40px;
+  margin: 8px 0;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.tool-container button:hover {
+  background-color: #DACA91;
+  color: white;
+}
+
+.tool-container button:focus {
+    outline:0;
+}
+
+
+/* Parameters: Buttons, checkboxes, sliders.. */
+
+/* Sliders*/
+input[type="range"] {
+    width: 100%;
+    height: 3px;
+    -webkit-appearance:none;
+    background-color: #f2f1ed;
+    outline: none;
+    border-radius: 4px;
+    margin-bottom: 7px;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance:none;
+    background: #f2f1ed;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+}
+
+/* Box Title*/
+#parameters-container h1 {
+  font-family: 'Nunito';
+  font-weight: normal;
+  font-size: 14px;
+  color: #B8B7B2;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+/* Labels */
+#parameters-container p {
+  font-family: 'Nunito';
+  font-weight: normal;
+  font-size: 14px;
+  color: #B8B7B2;
+  text-align: left;
+  text-transform: capitalize;
+}
+
+.group p {
+   margin-bottom: 5px;
+}
+
+/* Text Box and drop down*/
+input[type="text"], select, input[type="color"]{
+    height: 22px;
+    border-radius: 10px;
+    border: 1px solid #B8B7B2;
+    background: #FFFFFF;
+    font-family: 'nunitoLight';
+    font-weight: normal;
+    font-size: 14px;
+    padding-left: 5px;
+    color: #B8B7B2;
+    width: 100%;
+    margin-bottom: 5px;
+    transition-duration: 0.4s;
+}
+
+input[type="text"]:focus, select:focus, input[type="color"] {
+    outline:0;
+}
+
+/*select:hover{
+    border: 2px solid #B8B7B2;
+}*/
+
+select {
+    padding-right: 5px;
+}
+
+/* Button */
+#parameters-container button {
+    height: 22px;
+    padding: 0px;
+    margin: 0px 0;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+input[type="color"]{
+    width: 100%;
+    padding-left: 2px;
+}
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+}
+
+/* Modal Content */
+.modal-content {
+  background: rgba(184, 183, 178, 0.85);
+  box-shadow: 0px 17px 20px rgba(0, 0, 0, 0.3);
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  margin: auto;
+  padding: 10px;
+  width: 40%;
+  color:white;
+}
+
+.text {
+  padding: 50px;
+}
+
+.text h2 {
+  font-family: "nunitoLight";
+  padding-bottom: 15px;
+}
+
+.text ul {
+  list-style-image: url('resources/bullet.svg');
+}
+
+.text li {
+  padding: 10px;
+}
+
+.file {
+  background: rgba(184, 183, 178, 0.95);
+  box-shadow: 0px 17px 20px rgba(0, 0, 0, 0.3);
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  width: 40%;
+  height: auto;
+  margin: auto;
+  padding: 10px;
+  padding-right: 60px;
+  padding-left: 60px;
+  display: flex;
+}
+
+.file p{
+  color:white;
+  width: 50%;
+  padding: 5%;
+  text-align: center;
+  margin: auto;
+}
+
+.button-container{
+  width: 50%;
+  padding: 5%;
+  text-align: center;
+}
+
+.file button {
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  height: 100px;
+  width: 100px;
+  padding: 0px;
+}
+
+.file button:focus {
+  outline: 0;
+}
+
+.file img {
+  height: 52px;
+  width: 52px;
+}
+
+/* The Close Button */
+.close {
+  color: #E8E7E7;
+  float: right;
+  font-size: 28px;
+  padding: 10px;
+  /*font-weight: bold;*/
+}
+
+.close:hover,
+.close:focus {
+  color: #DBBF4D;
+  text-decoration: none;
+  cursor: pointer;
 }

@@ -1,65 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HJ8DTY18V0"></script>
-    <script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src=
+  "https://www.googletagmanager.com/gtag/js?id=G-HJ8DTY18V0"></script>
+  <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-HJ8DTY18V0');
-    </script>
+  </script>
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Diamond Tiles</title>
-
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
-    <script src="sketch.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Kaleidoscope Toolbox</title>
+  <link rel="stylesheet" href="style.css">
+  <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+  <link rel="icon" href="resources/logo.png">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+  <script src="sketch.js"></script>
 </head>
+
 <body>
-    <div id="title">
-        <h2>Diamond Tiles</h2>
-    </div>
-    <div class="row">
-        <div class="column" id="parameters">
-            <h4>Tiles</h4>
-            <div class="group-params">
-                <div>Number of tiles</div>
-                <div id="n-tiles-param"></div>
-                <div class="flex-container">
-                    <div id="second-color-param" style="flex-grow: 4"></div>
-                    <div style="flex-grow: 1"></div>
-                    <div id="main-color-param" style="flex-grow: 4"></div>
-                    <div style="flex-grow: 1"></div>
-                    <div id="background-color-param" style="flex-grow: 4"></div>
-                    <div style="flex-grow: 1"></div>
-                    <div id="outline-param" style="flex-grow: 4"></div>
-                </div>
-            </div>
-            <h4>Repetition</h4>
-            <div class="group-params">
-                <div>Number of Rows</div>
-                <div id="rows-param"></div>
-                <div>Number of Columns</div>
-                <div id="columns-param"></div>
-            </div>
-            <h4>Download</h4>
-                <div class="flex-container">
-                    <div id="download-dinA1" style="flex-grow: 4"></div>
-                    <div style="flex-grow: 1"></div>
-                    <div id="download-dinA2" style="flex-grow: 4"></div>
-                    <div style="flex-grow: 1"></div>
-                    <div id="download-dinA3" style="flex-grow: 4"></div>
-                    <div style="flex-grow: 1"></div>
-                    <div id="download-dinA4" style="flex-grow: 4"></div>
-                </div>
+  <!-- Navigation bar -->
+  <div class="nav-container">
+    <div class="wrapper">
+      <nav>
+        <div class="logo">
+          <a href="../../index.html">
+              <img class="init-btn"src="resources/logo.png" alt="">
+          </a>
+          <ul class="init-info">
+            <li>
+              <a href="../../index.html">Kaleidoscope Toolbox</a>
+            </li>
+            <li class="separator">|</li>
+            <li class="tool-name">Diamond Tiles</li>
+          </ul>
         </div>
-        <div class="column" id="canvas-container"></div>
+        <ul class="nav-items">
+          <li class="dropdown">
+            <a href="../../tools.html">
+                <button class="dropbtn">TOOLS</button>
+            </a>
+            <div class="dropdown-content">
+              <a href="#">Galician Style Pattern</a>
+              <a href="#">Minimalist Landscape</a>
+              <a href="#">Mallorca Ikat</a>
+              <a href="#">Islamic Pattern</a>
+              <a href="#">Diamond Tiles</a>
+            </div>
+          </li>
+          <li><button>DESIGNS</button></li>
+          <li><button>BLOG</button></li>
+          <li><button>ABOUT</button></li>
+          <li><button>CONTACT</button></li>
+        </ul>
+      </nav>
     </div>
+  </div>
+  <!-- end of Navigation bar -->
+
+  <!-- The Tool's UI -->
+  <div class="tool-container">
+    <div class="column" id="parameters-container"></div>
+    <div class="column" id="canvas-container">
+      <ul>
+        <li class="canvas-list">
+          <div id="canvas-element"></div>
+        </li>
+        <li><button id="myBtn">DOWNLOAD</button></li>
+      </ul>
+    </div>
+  </div>
+  <!-- end of the Tool's UI -->
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">×</span>
+      <div class="text">
+        <h2>Do you want new tools to create more designs?</h2>
+        <ul>
+          <li>Support our project by sharing your designs and
+          tagging us @kaleidoscopetoolbox</li>
+          <li>This file is for personal use only, if you’re
+          interested in using our tools for commercial reasons,
+          contact us.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="file">
+      <p>File in .PNG format with resolution 2480x3508 pixels.
+      Ideal for A4 prints.</p>
+      <div class="button-container">
+        <button id="download" onclick=
+        "on_download_dina4()"><img src="resources/downloadG.png"
+        alt=""></button>
+      </div>
+    </div>
+  </div>
+  <!-- end of the Modal -->
+
+  <!-- The Modal's logic -->
+  <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+  <!-- End of the Modal's logic -->
+
 </body>
+
 </html>
