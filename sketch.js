@@ -1,8 +1,7 @@
 const SERVER_URL = 'http://ec2-35-177-210-34.eu-west-2.compute.amazonaws.com'
 
-const WIDTH = 400;
-const HEIGHT = 564;
-const UPLOAD_DOWNSCALE = 2;
+const HEIGHT = window.innerHeight - 100 - 63;
+const WIDTH = HEIGHT / 1.41;
 
 const COLORS = {
     'red': [255, 0, 0],
@@ -61,56 +60,69 @@ function get_query_variable(variable)
 
 function setup()
 {
-    // Tiles
+    // Create Tiles Parameters
+    const tiles_box = createDiv();
+    tiles_box.parent('parameters-container');
+    tiles_box.addClass('box');
+    tiles_box_title = createElement('h1', 'TILES');
+    tiles_box_title.parent(tiles_box);
+
+    n_tiles_label = createP('Number of Tiles');
+    n_tiles_label.parent(tiles_box);
     n_tiles_slider = createSlider(11, 41, n_tiles, 2);
     n_tiles_slider.input(on_n_tiles_changed);
-    n_tiles_slider.parent('n-tiles-param');
+    n_tiles_slider.parent(tiles_box);
+
+    n_colors_label = createP('Color of Tiles');
+    n_colors_label.parent(tiles_box);
+
+    tiles_color_group = createDiv();
+    tiles_color_group.parent(tiles_box);
+    tiles_color_group.addClass('group');
 
     main_color_picker = createColorPicker(color(main_color));
     main_color_picker.input(on_main_color_changed);
-    main_color_picker.parent('main-color-param');
+    main_color_picker.parent(tiles_color_group);
 
     second_color_picker = createColorPicker(color(second_color));
     second_color_picker.input(on_second_color_changed);
-    second_color_picker.parent('second-color-param');
+    second_color_picker.parent(tiles_color_group);
 
     background_color_picker = createColorPicker(color(background_color));
     background_color_picker.input(on_background_color_changed);
-    background_color_picker.parent('background-color-param');
+    background_color_picker.parent(tiles_color_group);
 
-    outline_checkbox = createCheckbox('Outline', outline);
+    outline_checkbox = createCheckbox('', outline);
     outline_checkbox.changed(on_outline_changed);
-    outline_checkbox.parent('outline-param');
+    outline_checkbox.parent(tiles_color_group);
+    outline_label = createP('Outline');
+    outline_label.parent(tiles_color_group);
 
     // Create Repetition Parameters
+    const repetition_box = createDiv();
+    repetition_box.parent('parameters-container');
+    repetition_box.addClass('box');
+    repetition_box_title = createElement('h1', 'REPETITION');
+    repetition_box_title.parent(repetition_box);
+
+    rows_label = createP('Number of Rows');
+    rows_label.parent(repetition_box);
     rows_slider = createSlider(0, 10, rows);
     rows_slider.input(on_rows_changed);
-    rows_slider.parent('rows-param');
+    rows_slider.parent(repetition_box);
 
+    columns_label = createP('Number of Columns');
+    columns_label.parent(repetition_box);
     columns_slider = createSlider(0, 10, columns);
     columns_slider.input(on_columns_changed);
-    columns_slider.parent('columns-param');
-
-    // Create Download
-    let dina1_button = createButton('Din A1');
-    dina1_button.parent('download-dinA1');
-    dina1_button.mousePressed(on_download_dina1);
-
-    let dina2_button = createButton('Din A2');
-    dina2_button.parent('download-dinA2');
-    dina2_button.mousePressed(on_download_dina2);
-
-    let dina3_button = createButton('Din A3');
-    dina3_button.parent('download-dinA3');
-    dina3_button.mousePressed(on_download_dina3);
-
-    let dina4_button = createButton('Din A4');
-    dina4_button.parent('download-dinA4');
-    dina4_button.mousePressed(on_download_dina4);
+    columns_slider.parent(repetition_box);
 
     // Create Canvas
     let canvas = createCanvas(WIDTH, HEIGHT);
-    canvas.parent("canvas-container");
+    canvas.parent("canvas-element");
+    canvas.style("background", "#FFFFFF");
+    canvas.style("border-radius", "50px");
+    canvas.style("box-shadow", "0px 4px 30px rgba(0, 0, 0, 0.02)");
 
     // Load parameters from template and update canvas.
     load_parameters();
