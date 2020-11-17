@@ -185,28 +185,24 @@ function on_rows_changed()
 function on_download_dina1()
 {
     upload_params('diamond-tiles', 'dinA1');
-    upload_image('diamond-tiles');
     download_image('a1', 'diamond-tiles-dinA1.png');
 }
 
 function on_download_dina2()
 {
     upload_params('diamond-tiles', 'dinA2');
-    upload_image('diamond-tiles');
     download_image('a2', 'diamond-tiles-dinA2.png');
 }
 
 function on_download_dina3()
 {
     upload_params('diamond-tiles', 'dinA3');
-    upload_image('diamond-tiles');
     download_image('a3', 'diamond-tiles-dinA3.png');
 }
 
 function on_download_dina4()
 {
     upload_params('diamond-tiles', 'dinA4');
-    upload_image('diamond-tiles');
     download_image('a4', 'diamond-tiles-dinA4.png');
 }
 
@@ -394,27 +390,6 @@ function upload_params(tool, size)
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         mode: 'no-cors', body: JSON.stringify(params_data)
-    };
-    fetch(url, options);
-}
-
-function upload_image(tool)
-{
-    const url = SERVER_URL + '/cgi-bin/upload-image';
-    width = int(WIDTH / UPLOAD_DOWNSCALE);
-    height = int(HEIGHT / UPLOAD_DOWNSCALE);
-    img = create_image(width, height);
-    img.loadPixels();
-    const image_data = {
-        'tool': tool,
-        'width': width,
-        'height': height,
-        'pixels': img.pixels,
-    }
-    const options = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        mode: 'no-cors', body: JSON.stringify(image_data)
     };
     fetch(url, options);
 }
