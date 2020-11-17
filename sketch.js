@@ -44,6 +44,9 @@ let outline_checkbox;
 let rows_slider;
 let columns_slider;
 
+// Kaleidoscope Toolbox signature
+let signature;
+
 function get_query_variable(variable)
 {
     const query = window.location.search.substring(1);
@@ -57,6 +60,11 @@ function get_query_variable(variable)
         }
     }
     return false;
+}
+
+function preload()
+{
+    signature = loadImage("resources/signature.png");
 }
 
 function setup()
@@ -266,6 +274,11 @@ function create_image(img_width, img_height)
             img.copy(tiles, 0, 0, width, height, dx, dy, width, height);
         }
     }
+
+    img.blend(
+        signature, 0, 0, signature.width, signature.height,
+        int(2 / 3 * img_width),  int(11 / 12 * img_height), int(img_width / 4),
+        int(img_height / 16), DARKEST);
 
     return img;
 }
