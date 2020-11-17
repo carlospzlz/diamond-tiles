@@ -36,6 +36,7 @@ let rows = 2;
 // Tiles
 let n_tiles_slider;
 let main_color_picker;
+let second_color_picker;
 let background_color_picker;
 let outline_checkbox;
 
@@ -131,7 +132,6 @@ function setup()
 function load_parameters()
 {
     const value = get_query_variable("template");
-    console.log(value);
     if (!value)
     {
         update_canvas();
@@ -159,6 +159,17 @@ function on_parameters_received(data)
     outline = data['outline'];
     rows = data['rows'];
     second_color = data['second_color'];
+
+    // Update UI
+    // Tiles
+    n_tiles_slider.value(n_tiles);
+    main_color_picker.value(color(main_color).toString('#rrggbb'));
+    second_color_picker.value(color(second_color).toString('#rrggbb'));
+    background_color_picker.value(color(background_color).toString('#rrggbb'));
+    outline_checkbox.checked(outline);
+    // Repetition
+    rows_slider.value(rows);
+    columns_slider.value(columns);
 
     update_canvas();
 }
