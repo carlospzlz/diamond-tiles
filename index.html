@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
   <!-- Global site tag (gtag.js) - Google Analytics -->
+
   <script async src=
   "https://www.googletagmanager.com/gtag/js?id=G-HJ8DTY18V0"></script>
   <script>
@@ -11,19 +12,19 @@
       gtag('js', new Date());
       gtag('config', 'G-HJ8DTY18V0');
   </script>
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content=
+  "width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Kaleidoscope Toolbox</title>
   <link rel="stylesheet" href="style.css">
-  <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Nunito' rel=
+  'stylesheet'>
   <link rel="icon" href="resources/logo.png">
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+  <script src=
+  "https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
   <script src="sketch.js"></script>
 </head>
-
 <body>
   <!-- Navigation bar -->
 
@@ -80,40 +81,50 @@
     </div>
   </div>
   <!-- End of Navigation bar -->
-
   <!-- The Tool's UI -->
+
   <div class="tool-container">
-    <div class="column" id="parameters-container"></div>
+    <div class="column" id="parameters-container">
+    </div>
+
     <div class="column" id="canvas-container">
       <ul>
         <li class="canvas-list">
-          <div id="canvas-element"></div>
+          <div id="canvas-element">
+          </div>
         </li>
-        <li><button id="myBtn">DOWNLOAD</button></li>
+
+        <li><button id="myBtn">DOWNLOAD</button>
+        </li>
       </ul>
     </div>
   </div>
   <!-- end of the Tool's UI -->
-
   <!-- The Modal -->
+
   <div id="myModal" class="modal">
     <!-- Modal content -->
+
     <div class="modal-content">
       <span class="close">×</span>
       <div class="text">
         <h2>Do you want new tools to create more designs?</h2>
+
         <ul>
           <li>Support our project by sharing your designs and
           tagging us @kaleidoscopetoolbox</li>
+
           <li>This file is for personal use only, if you’re
           interested in using our tools for commercial reasons,
           contact us.</li>
         </ul>
       </div>
     </div>
+
     <div class="file">
       <p>File in .PNG format with resolution 2480x3508 pixels.
       Ideal for A4 prints.</p>
+
       <div class="button-container">
         <button id="download" onclick=
         "on_download_dina4()"><img src="resources/downloadG.png"
@@ -122,7 +133,6 @@
     </div>
   </div>
   <!-- end of the Modal -->
-
   <!-- The Modal's logic -->
   <script>
     // Get the modal
@@ -150,9 +160,6 @@
         modal.style.display = "none";
       }
     }
-  </script>
-  <!-- End of the Modal's logic -->
-
+  </script> <!-- End of the Modal's logic -->
 </body>
-
 </html>
