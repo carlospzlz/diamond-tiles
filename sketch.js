@@ -6,7 +6,7 @@ const WIDTH = HEIGHT / 1.41;
 const COLORS = {
     'red': [255, 0, 0],
     'green': [0, 255, 0],
-    'blue' : [0, 0, 255],
+    'blue': [0, 0, 255],
     'white': [255, 255, 255],
     'black': [0, 0, 0],
     'main': [220, 150, 150],
@@ -54,7 +54,7 @@ function get_query_variable(variable)
     for (let i = 0; i < vars.length; ++i)
     {
         const pair = vars[i].split("=");
-        if(pair[0] == variable)
+        if (pair[0] == variable)
         {
             return pair[1];
         }
@@ -150,10 +150,12 @@ function load_parameters()
         SERVER_URL + '/tools/diamond-tiles/templates/json/' + value + '.json';
 
     fetch(url)
-        .then(function(resp) {
+        .then(function(resp)
+        {
             return resp.json();
         })
-        .then(function(data) {
+        .then(function(data)
+        {
             on_parameters_received(data);
         });
 }
@@ -277,7 +279,7 @@ function create_image(img_width, img_height)
 
     img.blend(
         signature, 0, 0, signature.width, signature.height,
-        int(2 / 3 * img_width),  int(11 / 12 * img_height), int(img_width / 4),
+        int(2 / 3 * img_width), int(11 / 12 * img_height), int(img_width / 4),
         int(img_height / 16), DARKEST);
 
     return img;
@@ -425,8 +427,12 @@ function upload_params(tool, size)
     };
     const options = {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        mode: 'no-cors', body: JSON.stringify(params_data)
+        headers:
+        {
+            'Content-Type': 'application/json'
+        },
+        mode: 'no-cors',
+        body: JSON.stringify(params_data)
     };
     fetch(url, options);
 }
