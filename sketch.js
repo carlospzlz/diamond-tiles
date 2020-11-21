@@ -409,6 +409,10 @@ function download_image(format, filename)
 {
     img = create_image(DIMENSIONS[format][0], DIMENSIONS[format][1]);
     save(img, filename)
+    gtag('event', 'design_download',
+    {
+        'event_category': 'engagement'
+    });
 }
 
 function upload_params(tool, size)
