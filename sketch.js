@@ -1,5 +1,5 @@
-const SERVER_URL = 'http://ec2-35-177-210-34.eu-west-2.compute.amazonaws.com'
 const CLOUDFRONT_URL = 'https://d2r5nix41nlt7x.cloudfront.net'
+const SERVER_URL = 'http://ec2-35-177-210-34.eu-west-2.compute.amazonaws.com'
 
 const HEIGHT = window.innerHeight - 100 - 63;
 const WIDTH = HEIGHT / 1.41;
