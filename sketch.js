@@ -1,4 +1,5 @@
 const SERVER_URL = 'http://ec2-35-177-210-34.eu-west-2.compute.amazonaws.com'
+const CLOUDFRONT_URL = 'https://d2r5nix41nlt7x.cloudfront.net'
 
 const HEIGHT = window.innerHeight - 100 - 63;
 const WIDTH = HEIGHT / 1.41;
@@ -147,7 +148,8 @@ function load_parameters()
     }
 
     const url =
-        SERVER_URL + '/tools/diamond-tiles/templates/json/' + value + '.json';
+        CLOUDFRONT_URL + '/tools/diamond-tiles/templates/json/' + value +
+        '.json';
 
     fetch(url)
         .then(function(resp)
