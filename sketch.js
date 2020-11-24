@@ -1,9 +1,6 @@
 const CLOUDFRONT_URL = 'https://d2r5nix41nlt7x.cloudfront.net'
 const SERVER_URL = 'http://ec2-35-177-210-34.eu-west-2.compute.amazonaws.com'
 
-const HEIGHT = window.innerHeight - 100 - 63;
-const WIDTH = HEIGHT / 1.41;
-
 const COLORS = {
     'red': [255, 0, 0],
     'green': [0, 255, 0],
@@ -21,6 +18,10 @@ const DIMENSIONS = {
     'a4': [2480, 3508],
     'a5': [1748, 2480],
 }
+
+let canvas;
+let canvas_height = window.innerHeight - 100 - 63;
+let canvas_width = Math.round(canvas_height / 1.41);
 
 // Tiles
 let n_tiles = 11;
@@ -128,14 +129,19 @@ function setup()
     columns_slider.parent(repetition_box);
 
     // Create Canvas
-    let canvas = createCanvas(WIDTH, HEIGHT);
-    canvas.parent("canvas-element");
-    canvas.style("background", "#FFFFFF");
-    canvas.style("border-radius", "50px");
-    canvas.style("box-shadow", "0px 4px 30px rgba(0, 0, 0, 0.02)");
+    canvas = create_canvas(canvas_width, canvas_height);
 
     // Load parameters from template and update canvas.
     load_parameters();
+}
+
+function create_canvas(width, height)
+{
+    canvas = createCanvas(canvas_width, canvas_height);
+    canvas.style("background", "#FFFFFF");
+    canvas.style("border-radius", "50px");
+    canvas.style("box-shadow", "0px 4px 30px rgba(0, 0, 0, 0.02)");
+    canvas.parent("canvas-element");
 }
 
 function load_parameters()
@@ -254,8 +260,8 @@ function on_download_dina4()
 
 function update_canvas()
 {
-    const img = create_image(WIDTH, HEIGHT);
-    image(img, 0, 0, WIDTH, HEIGHT);
+    const img = create_image(canvas_width, canvas_height);
+    image(img, 0, 0, canvas_width, canvas_height);
 }
 
 function create_image(img_width, img_height)
@@ -415,6 +421,14 @@ function download_image(format, filename)
     {
         'event_category': 'engagement'
     });
+}
+
+function windowResized()
+{
+    canvas_height = window.innerHeight - 100 - 63;
+    canvas_width = Math.round(canvas_height / 1.41);
+    canvas = create_canvas(canvas_width, canvas_height);
+    update_canvas();
 }
 
 function upload_params(tool, size)
