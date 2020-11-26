@@ -1,5 +1,5 @@
 const CLOUDFRONT_URL = 'https://d2r5nix41nlt7x.cloudfront.net'
-const SERVER_URL = 'http://ec2-35-177-210-34.eu-west-2.compute.amazonaws.com'
+const SERVER_URL = 'https://server.kaleidoscopetoolbox.com'
 
 const COLORS = {
     'red': [255, 0, 0],
