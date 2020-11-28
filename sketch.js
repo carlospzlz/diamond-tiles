@@ -1,4 +1,5 @@
-const CLOUDFRONT_URL = 'https://d2r5nix41nlt7x.cloudfront.net'
+//const CLOUDFRONT_URL = 'https://kaleidoscopetoolbox.com'
+const CLOUDFRONT_URL = 'http://localhost:8000'
 const SERVER_URL = 'https://server.kaleidoscopetoolbox.com'
 
 const COLORS = {
