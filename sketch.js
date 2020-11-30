@@ -1,5 +1,6 @@
 //const CLOUDFRONT_URL = 'https://kaleidoscopetoolbox.com'
-const CLOUDFRONT_URL = 'http://localhost:8000'
+//const CLOUDFRONT_URL = 'http://localhost:8000'
+const CLOUDFRONT_URL = 'https://server.kaleidoscopetoolbox.com'
 const SERVER_URL = 'https://server.kaleidoscopetoolbox.com'
 
 const COLORS = {
