@@ -130,6 +130,9 @@ function setup()
     columns_slider.input(on_columns_changed);
     columns_slider.parent(repetition_box);
 
+    // To guarantee an exact download resolution.
+    pixelDensity(1);
+
     // Create Canvas
     canvas = create_canvas(canvas_width, canvas_height);
 
