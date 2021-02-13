@@ -160,7 +160,7 @@ function load_parameters()
         CLOUDFRONT_URL + '/tools/diamond-tiles/templates/json/' + value +
         '.json';
 
-    fetch(url)
+    fetch(url, {mode:"no-cors"})
         .then(function(resp)
         {
             return resp.json();
